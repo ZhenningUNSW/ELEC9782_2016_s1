@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ZhenningA2TTwo</string>
+    <string name="press_me_to_get_imei">Press me to get IMEI and Android ID</string>
+    <string name="imei_show">IMEI:</string>
+    <string name="android_id_show">Android ID</string>
+</resources>
