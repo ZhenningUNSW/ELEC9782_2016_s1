@@ -1,14 +1,18 @@
 package com.example.zhenning.zhenninga2tfour;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.IBinder;
 import android.util.Log;
-
+import com.example.zhenning.zhenninga2tfour.wifiChangedBroadcastReceiver;
 /**
  * Created by zhenning on 21/04/16.
  */
 public class wifiService extends Service{
+
 
     private final String TAG = "wifiService";
 
@@ -31,6 +35,13 @@ public class wifiService extends Service{
         new Thread(new Runnable() {
             @Override
             public void run() {
+                IntentFilter intentFilter = new IntentFilter();
+
+                wifiChangedBroadcastReceiver wifiChanged = new wifiChangedBroadcastReceiver();
+
+                intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+
+                registerReceiver( wifiChanged, intentFilter );
 
             }
         }).start();
