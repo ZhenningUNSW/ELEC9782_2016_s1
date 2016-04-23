@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // finished
+
         IntentFilter intentFilter = new IntentFilter();
 
         intentFilter.addAction(BatteryManager.ACTION_CHARGING);
