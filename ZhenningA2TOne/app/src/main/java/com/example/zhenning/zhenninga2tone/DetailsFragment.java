@@ -6,6 +6,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -38,28 +39,16 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Create a ScrollView to put your hero data in
-        ScrollView scroller = new ScrollView(getActivity());
+        WebView showLink = new WebView(getActivity());
 
-        // TextView goes in the ScrollView
-        TextView text = new TextView(getActivity());
-
-        // A TypedValue can hold multiple dimension values which can be assigned dynamically
-        // applyDimensions receives the unit type to use which is COMPLEX_UNIT_DIP, which
-        // is Device Independent Pixels
-        // The padding amount being 4
-        // The final part is information on the devices size and density
         int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 4, getActivity().getResources().getDisplayMetrics());
 
-        // Set the padding to the TextView
-        text.setPadding(padding, padding, padding, padding);
+        showLink.setPadding(padding, padding, padding, padding);
 
-        // Add the TextView to the ScrollView
-        scroller.addView(text);
+        showLink.loadUrl(SuperHeroInfo.Url[getShownIndex()]);
 
-        // Set the currently selected heros data to the textView
-        text.setText(SuperHeroInfo.HISTORY[getShownIndex()]);
-        return scroller;
+        return showLink;
+
     }
 }

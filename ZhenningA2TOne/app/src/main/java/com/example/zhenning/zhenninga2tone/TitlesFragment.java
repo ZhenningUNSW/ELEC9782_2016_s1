@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -113,17 +114,21 @@ public class TitlesFragment extends ListFragment {
             }
 
         } else {
-            // Launch a new Activity to show our DetailsFragment
-            Intent intent = new Intent();
 
-            // Define the class Activity to call
-            intent.setClass(getActivity(), DetailsActivity.class);
+            DetailsFragment details = (DetailsFragment) getFragmentManager().findFragmentById(R.id.webbrowser);
 
-            // Pass along the currently selected index assigned to the keyword index
-            intent.putExtra("index", index);
+            if (details == null || details.getShownIndex() != index){
 
-            // Call for the Activity to open
-            startActivity(intent);
+                details = DetailsFragment.newInstance(index);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                ft.replace(R.id.titles, details);
+
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+                ft.commit();
+            }
         }
     }
 }

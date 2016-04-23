@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayoutLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-
-    <FrameLayout>
         <fragment class="com.example.zhenning.zhenninga2tone.TitlesFragment"
         android:id="@+id/titles"
         android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             />
-    </FrameLayout>
 
-    <FrameLayout>
-        <fragment class="com.example.zhenning.zhenninga2tone.DetailsFragment"
+
+    <FrameLayout
             android:id="@+id/details"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            />
+    />
 
-    </FrameLayout>
-
-</LinearLayoutLayout>
+</LinearLayout>
