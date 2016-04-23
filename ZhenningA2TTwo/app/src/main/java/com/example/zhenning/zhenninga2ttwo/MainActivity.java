@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     protected void onPostExecute(String s) {
-                        ((TextView) findViewById(R.id.write_done)).setText("Write Done.");
+                        TextView textView = ((TextView) findViewById(R.id.write_done));
+                        textView.setText("Write Done.");
                     }
                 };
             }
