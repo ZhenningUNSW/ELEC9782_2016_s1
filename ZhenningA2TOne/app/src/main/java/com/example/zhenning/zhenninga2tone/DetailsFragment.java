@@ -59,6 +59,7 @@ public class DetailsFragment extends Fragment {
 
     @Override
     public void onPause() {
+        /*
 
         int orientation = getResources().getConfiguration().orientation;
 
@@ -77,6 +78,7 @@ public class DetailsFragment extends Fragment {
             ft.commit();
         }
         else
+        */
             super.onPause();
     }
 
