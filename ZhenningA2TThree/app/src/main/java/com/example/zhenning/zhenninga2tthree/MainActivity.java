@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         IntentFilter intentFilter = new IntentFilter();
 
-        intentFilter.addAction(BatteryManager.ACTION_CHARGING);
+        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
 
         registerReceiver(broadcastReceiver, intentFilter);
 

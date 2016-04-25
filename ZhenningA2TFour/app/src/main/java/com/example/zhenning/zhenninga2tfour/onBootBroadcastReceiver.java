@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.FileWriter;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class onBootBroadcastReceiver extends BroadcastReceiver {
         i.setClass(context, wifiService.class);
 
         context.startService(i);
+
 
         new AsyncTask<String, String, String>(){
 

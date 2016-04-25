@@ -1,11 +1,16 @@
 package com.example.zhenning.zhenninga2tone;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.usage.ConfigurationStats;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -51,4 +56,28 @@ public class DetailsFragment extends Fragment {
         return showLink;
 
     }
+
+    @Override
+    public void onPause() {
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            TitlesFragment titles = (TitlesFragment) getFragmentManager().findFragmentById(R.id.titles);
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+            // Replace any other Fragment with our new Details Fragment with the right data
+            ft.replace(R.id.details, titles);
+
+            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+            ft.commit();
+        }
+        else
+            super.onPause();
+    }
+
 }

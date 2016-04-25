@@ -39,7 +39,7 @@ public class wifiService extends Service{
 
                 wifiChangedBroadcastReceiver wifiChanged = new wifiChangedBroadcastReceiver();
 
-                intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+                intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION );
 
                 registerReceiver( wifiChanged, intentFilter );
 
