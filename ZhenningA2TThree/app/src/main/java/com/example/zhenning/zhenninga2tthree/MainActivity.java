@@ -34,33 +34,36 @@ public class MainActivity extends AppCompatActivity {
 
             TextView textView = (TextView) findViewById(R.id.diplayZone);
 
-            textView.setText("The phone is charging!\n");
+            int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
 
-            try {
+            if (plugged != 0) {
 
-                Settings.System.putInt(cResolver,
-                        Settings.System.SCREEN_BRIGHTNESS_MODE,
-                        Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                textView.setText("The phone is charging!\n");
 
-                brightness = Settings.System.getInt(cResolver,
-                                Settings.System.SCREEN_BRIGHTNESS);
+                try {
 
-                brightness = 255;
+                    Settings.System.putInt(cResolver,
+                            Settings.System.SCREEN_BRIGHTNESS_MODE,
+                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
 
-                Settings.System.putInt(cResolver,
-                        Settings.System.SCREEN_BRIGHTNESS,
-                        brightness);
+                    brightness = Settings.System.getInt(cResolver,
+                            Settings.System.SCREEN_BRIGHTNESS);
+
+                    brightness = 255;
+
+                    Settings.System.putInt(cResolver,
+                            Settings.System.SCREEN_BRIGHTNESS,
+                            brightness);
+
+                } catch (Settings.SettingNotFoundException e) {
+
+                    //Throw an error case it couldn't be retrieved
+                    Log.e("Error", "Cannot access system brightness");
+
+                    e.printStackTrace();
+                }
 
             }
-            catch (Settings.SettingNotFoundException e) {
-
-                //Throw an error case it couldn't be retrieved
-                Log.e("Error", "Cannot access system brightness");
-
-                e.printStackTrace();
-            }
-
-
 
         }
     };
