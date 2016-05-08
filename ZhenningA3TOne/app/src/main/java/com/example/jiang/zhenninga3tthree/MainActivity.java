@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.detectlanguage.DetectLanguage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         InputStream inputStream = null;
         private String urlAddress = "http://ws.detectlanguage.com/0.2/detect?q=";
 
+
         @Override
         protected String doInBackground(String... params) {
             try {
@@ -101,23 +101,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        protected void onPostExcute(String result){
+        protected void onPostExecute(String result){
+            Log.v("onPostExecute",result);
             try {
                 JSONObject reader = new JSONObject(result);
                 JSONObject data = reader.getJSONObject("data");
                 JSONArray detections = data.optJSONArray("detections");
 
                 // Only parse the first result
-                JSONObject detection = detections.getJSONObject(1);
+                JSONObject detection = detections.getJSONObject(0);
                 String languageDetected = detection.getString("language");
-                double confidence = detection.getDouble("confidence");
-                boolean isReliable = detection.getBoolean("isReliable");
-                textViewConfidence.setText(Double.toString(confidence));
-                textViewReliable.setText(Boolean.toString(isReliable));
+                String confidence = detection.optString("confidence").toString();
+                String isReliable = detection.optString("isReliable").toString();
+                languageDetected = "Language is : " + languageDetected;
+                confidence = "Confidence is : " + confidence;
+                isReliable = "Reliable? " + isReliable;
+                textViewConfidence.setText(confidence);
+                textViewReliable.setText(isReliable);
                 textViewLanguage.setText(languageDetected);
             }
             catch (JSONException e){
                 Log.v("LanguageDetector", "JSON throw a error!");
+                e.printStackTrace();
             }
 
         }
